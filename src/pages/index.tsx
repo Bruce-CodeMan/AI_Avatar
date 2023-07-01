@@ -19,6 +19,7 @@ import {
   DialogTitle, 
   DialogTrigger 
 } from "@/components/ui/dialog";
+import Layout from "@/components/layout";
 
 
 const HomePage = () => {
@@ -27,20 +28,8 @@ const HomePage = () => {
   const [ isLogin, setIsLogin ] = useState(false);
 
   return (
-    <div className="flex w-full h-full flex-col justify-center items-center">
-      <div className="fixed bg-gradient-to-br from-pink-100 via-white to-sky-200 inset-0 -z-10"></div>
-      <div className="container mx-auto">
-        <header className="flex w-full justify-between py-4 px-10 bg-transparen mx-auto max-w-screen-xl">
-          <div>
-            {/* logo */}
-            AI AVATAR
-          </div>
-          <div>
-            {/* this is for menu */}
-            <Button>Logout</Button>
-          </div>
-        </header>
-        <div className="flex flex-col space-y-6 m-10 justify-center items-center">
+    <Layout>
+      <div className="flex flex-col space-y-6 m-10 justify-center items-center">
           <div className="bg-gradient-to-br from-black to-slate-600 text-transparent bg-clip-text text-6xl font-semibold text-center leading-snug">
             <p>Generate you own</p>{" "}
             <p>
@@ -104,8 +93,8 @@ const HomePage = () => {
             </div>
           </div>
         </div>
-      </div>
-    </div>
+    </Layout>
+    
   )
 }
 
