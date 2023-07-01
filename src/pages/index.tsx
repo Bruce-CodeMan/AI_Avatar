@@ -3,10 +3,28 @@
  * @Author: Bruce Hsu
  * @Description: 
  */
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import React from "react";
+import { ChevronRight } from "lucide-react";
+import React, { useState } from "react";
+
+
+// Custom Imports
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { FaGoogle } from "react-icons/fa";
+import { 
+  Dialog, 
+  DialogContent, 
+  DialogFooter, 
+  DialogHeader, 
+  DialogTitle, 
+  DialogTrigger 
+} from "@/components/ui/dialog";
+
 
 const HomePage = () => {
+
+  const [ email, setEmail ] = useState('');
+  const [ isLogin, setIsLogin ] = useState(false);
 
   return (
     <div className="flex w-full h-full flex-col justify-center items-center">
@@ -19,6 +37,7 @@ const HomePage = () => {
           </div>
           <div>
             {/* this is for menu */}
+            <Button>Logout</Button>
           </div>
         </header>
         <div className="flex flex-col space-y-6 m-10 justify-center items-center">
@@ -30,7 +49,8 @@ const HomePage = () => {
             
           </div>
           <div className="my-12 w-full max-w-2xl">
-            <Dialog>
+            {!isLogin && (
+              <Dialog>
               <DialogTrigger asChild>
               <button className="w-full rounded-full bg-gradient-to-tr from-sky-400 duration-200 via-lime-300 to-yellow-400 p-1 transition transform active:scale-95"
                 onClick={()=> { console.log("click!") }}
@@ -43,14 +63,45 @@ const HomePage = () => {
               <DialogContent>
                 <DialogHeader>
                   <DialogTitle>Complete authentication</DialogTitle>
-                  <DialogDescription>Two authentication flows are here</DialogDescription>
                 </DialogHeader>
-                <div>here us the other content of the dialog</div>
+                <form 
+                  onSubmit={(e)=> {
+                    setIsLogin(true);
+                    e.preventDefault();
+                    console.log(email, "signing")
+                  }} 
+                  className="flex flex-col space-y-4"
+                >
+                  <Input 
+                    type={"email"} 
+                    required 
+                    placeholder="BruceHsu@qq.com" 
+                    onChange={e => setEmail(e.target.value)} 
+                    value={email}
+                  />
+                  <Button type={"submit"} className="w-full">
+                    Verify your email
+                  </Button>
+                  <p className="w-full text-center font-bold">OR</p>
+                  <Button>
+                    <FaGoogle className="mr-2"/>
+                    Sign In With Google
+                  </Button>
+                </form>
                 <DialogFooter>
                   this is dialog
                 </DialogFooter>
               </DialogContent>
             </Dialog>
+            )}
+            <div className="relative flex w-full justify-center">
+                {isLogin && (
+                  <Button className="w-full group">
+                    Checkout
+                    <ChevronRight className="ml-2 transition group-hover:translate-x-1"/>
+                  </Button>
+                )}
+            </div>
           </div>
         </div>
       </div>
