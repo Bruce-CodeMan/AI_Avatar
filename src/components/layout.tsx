@@ -22,3 +22,5 @@ const Layout = ({ children }: React.PropsWithChildren) => {
         </div>
     )
 }
+
+export default Layout;
