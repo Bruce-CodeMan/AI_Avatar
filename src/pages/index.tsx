@@ -3,6 +3,7 @@
  * @Author: Bruce Hsu
  * @Description: 
  */
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import React from "react";
 
 const HomePage = () => {
@@ -29,13 +30,27 @@ const HomePage = () => {
             
           </div>
           <div className="my-12 w-full max-w-2xl">
-          <button className="w-full rounded-full bg-gradient-to-tr from-sky-400 duration-200 via-lime-300 to-yellow-400 p-1 transition transform active:scale-95"
-            onClick={()=> { console.log("click!") }}
-          >
-            <div className="bg-white rounded-full py-2 tracking-widest">
-              即刻生成头像
-            </div>
-          </button>
+            <Dialog>
+              <DialogTrigger asChild>
+              <button className="w-full rounded-full bg-gradient-to-tr from-sky-400 duration-200 via-lime-300 to-yellow-400 p-1 transition transform active:scale-95"
+                onClick={()=> { console.log("click!") }}
+              >
+                <div className="bg-white rounded-full py-2 tracking-widest">
+                  即刻生成头像
+                </div>
+              </button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Complete authentication</DialogTitle>
+                  <DialogDescription>Two authentication flows are here</DialogDescription>
+                </DialogHeader>
+                <div>here us the other content of the dialog</div>
+                <DialogFooter>
+                  this is dialog
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
           </div>
         </div>
       </div>
