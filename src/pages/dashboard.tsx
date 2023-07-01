@@ -3,6 +3,7 @@ import { ImSpinner9 } from "react-icons/im";
 
 // Custom Imports
 import Layout from "@/components/layout";
+import Dropzone from "@/components/dropzone";
 
 const Dashboard = () => {
 
@@ -21,6 +22,7 @@ const Dashboard = () => {
     return (
         <Layout>
             {/* this is protected page, only for the users who have done the payment */}
+            <Dropzone/>
         </Layout>
     )
 }

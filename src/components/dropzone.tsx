@@ -14,10 +14,19 @@ const Dropzone = () => {
             'image/jpeg': ['.jpeg']
         },
         onDrop: acceptedFiles => {
-            setFiles(acceptedFiles.map(file => Object.assign(file, {
-                preview: URL.createObjectURL(file),
-                id: nanoid()
-            })))
+
+            const allSelectedFiles = [
+                ...acceptedFiles.map(file =>
+                    Object.assign(file, {
+                        preview: URL.createObjectURL(file),
+                        id: nanoid(),
+                })
+            ),
+            ...files
+            ]
+
+            allSelectedFiles.splice(10)
+            setFiles(allSelectedFiles)
         }
     })
 
@@ -27,21 +36,23 @@ const Dropzone = () => {
     }, [])
 
     return (
-        <section className="container">
-            <div {...getRootProps({ className: 'dropzone' })}>
-                <input {...getInputProps()} />
-                <p>Drag 'n' drop some files here, or click to select files</p>
+        <section className="w-full h-full flex flex-col space-y-4 mx-auto p-10">
+            <div {...getRootProps()} 
+                className="rounded-xl border-dashed flex items-center justify-center border border-black p-10 bg-slate-100 hover:bg-black/10"
+            >
+                <input {...getInputProps()} className="w-full h-full"/>
+                <p className="text-gray-400">Drag 3 to 10 drop some images here, or click to select files</p>
             </div>
-            <div className="flex justify-center items-center flex-wrap max-w-screen-md">
+            <div className="flex flex-wrap items-center justify-center">
 
             {
                 files && files.length > 0 && (
                     files.map(file => (
-                        <div key={file.id} className="w-full h-full">
+                        <div key={file.id} className="w-[256px] h-[256px] m-4">
                             <img
                                 src={file.preview}
                                 alt={file.name}
-                                className="object-cover w-[512px] h-[512px]"
+                                className="object-cover w-full h-full"
                             />
                         </div>
                     ))
